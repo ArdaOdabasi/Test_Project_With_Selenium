@@ -1,4 +1,4 @@
-package tests.Islemler.TopluDurusIslemleri;
+package tests.Islemler.OperasyonEmriGruplari;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Ekle_Butonu
+public class Duzenle_Butonu
 {
     protected WebDriver webDriver;
 
@@ -26,18 +26,24 @@ public class Ekle_Butonu
         Thread.sleep(2000);
         webDriver.findElement(By.xpath("//li[@data-uid=20]")).click();
         Thread.sleep(2000);
-        webDriver.findElement(By.xpath("//li[@data-uid=2090]")).click();
-        Thread.sleep(2000);
-        webDriver.findElement(By.xpath("//button[@aria-label=\"Ekle\"]")).click();
+        webDriver.findElement(By.xpath("//li[@data-uid=2020]")).click();
         Thread.sleep(2000);
     }
 
     @Test
-    public void Toplu_Durus_Baslatma() throws InterruptedException
+    public void Kayit_Duzenle() throws InterruptedException
     {
-        webDriver.findElement(By.xpath("//button[@type=\"Submit\"]")).click();
+        webDriver.findElement(By.xpath("//td[@aria-label=\"12  Kod\"]")).click();
         Thread.sleep(3000);
-        Assert.assertEquals("En az bir iş merkezi seçilmelidir." , webDriver.findElement(By.xpath("//div[@class=\"validation-message\"]")).getText());
+        webDriver.findElement(By.xpath("//button[@aria-label=\"Düzenle\"]")).click();
+        Thread.sleep(3000);
+        webDriver.findElement(By.id("Code")).clear();
+        Thread.sleep(3000);
+        webDriver.findElement(By.id("Code")).sendKeys("16");
+        Thread.sleep(3000);
+        webDriver.findElement(By.xpath("//button[@class=\"e-control e-btn e-lib e-control e-btn e-lib e-primary e-flat\"]")).click();
+        Thread.sleep(3000);
+        Assert.assertEquals("16",webDriver.findElement(By.xpath("//td[@aria-label=\"16  Kod\"]")).getText());
     }
 
     @After

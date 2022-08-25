@@ -35,12 +35,9 @@ public class Ekle_Butonu
     @Test
     public void Durus_Baslatma() throws InterruptedException
     {
-        webDriver.findElement(By.id("Code")).sendKeys("5");
+        webDriver.findElement(By.xpath("//button[@type=\"Submit\"]")).click();
         Thread.sleep(3000);
-        webDriver.findElement(By.xpath("//button[@class=\"e-control e-btn e-lib e-control e-btn e-lib e-primary e-flat\"]")).click();
-
-        Thread.sleep(3000);
-        Assert.assertEquals("Lütfen Tanım Giriniz." , webDriver.findElement(By.xpath("//div[@class=\"validation-message\"]")).getText());
+        Assert.assertEquals("Bu alan boş bırakılamaz" , webDriver.findElement(By.xpath("//div[@class=\"validation-message\"]")).getText());
     }
 
     @After

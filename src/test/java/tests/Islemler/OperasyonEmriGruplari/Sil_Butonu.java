@@ -5,10 +5,11 @@ import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Ekle_Butonu
+public class Sil_Butonu
 {
     protected WebDriver webDriver;
 
@@ -28,30 +29,37 @@ public class Ekle_Butonu
         Thread.sleep(2000);
         webDriver.findElement(By.xpath("//li[@data-uid=2020]")).click();
         Thread.sleep(2000);
-        webDriver.findElement(By.id("OperationOrderGroupGrid_add")).click();
+    }
+
+    @Test
+    public void Kayit_Sil() throws InterruptedException
+    {
+        webDriver.findElement(By.xpath("//td[@aria-label=\"10  Kod\"]")).click();
         Thread.sleep(2000);
+        webDriver.findElement(By.xpath("//button[@aria-label=\"Sil\"]")).click();
+        Thread.sleep(2000);
+        webDriver.findElement(By.xpath("//button[@class=\"e-control e-btn e-lib e-flat  e-primary\"]")).click();
+        Thread.sleep(2000);
+
+        try
+        {
+            webDriver.findElement(By.xpath("//td[@aria-label=\"10  Kod\"]"));
+        }
+        catch (NoSuchElementException exception)
+        {
+            Assert.assertEquals("class org.openqa.selenium.NoSuchElementException", exception.getClass());
+        }
     }
 
     @Test
-    public void Eksik_Kayit_Ekle() throws InterruptedException
+    public void Silme_Onayi_Reddet() throws InterruptedException
     {
-        webDriver.findElement(By.id("Code")).sendKeys("5");
-        Thread.sleep(3000);
-        webDriver.findElement(By.xpath("//button[@class=\"e-control e-btn e-lib e-control e-btn e-lib e-primary e-flat\"]")).click();
-
-        Thread.sleep(3000);
-        Assert.assertEquals("Lütfen Tanım Giriniz." , webDriver.findElement(By.xpath("//div[@class=\"validation-message\"]")).getText());
-    }
-
-    @Test
-    public void Yeni_Kayit_Ekle() throws InterruptedException
-    {
-        webDriver.findElement(By.id("Code")).sendKeys("10");
-        Thread.sleep(3000);
-        webDriver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/div/form/div[1]/div/div[3]/div/div/input")).sendKeys("Yeni Operasyon");
-        Thread.sleep(3000);
-        webDriver.findElement(By.xpath("//button[@class=\"e-control e-btn e-lib e-control e-btn e-lib e-primary e-flat\"]")).click();
-        Thread.sleep(3000);
+        webDriver.findElement(By.xpath("//td[@aria-label=\"10  Kod\"]")).click();
+        Thread.sleep(2000);
+        webDriver.findElement(By.xpath("//button[@aria-label=\"Sil\"]")).click();
+        Thread.sleep(2000);
+        webDriver.findElement(By.xpath("//button[@class=\"e-control e-btn e-lib e-flat \"]")).click();
+        Thread.sleep(2000);
         Assert.assertEquals("10",webDriver.findElement(By.xpath("//td[@aria-label=\"10  Kod\"]")).getText());
     }
 
@@ -61,10 +69,3 @@ public class Ekle_Butonu
         webDriver.quit();
     }
 }
-
-
-
-
-
-
-
